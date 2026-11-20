@@ -1,7 +1,12 @@
 class Temperature:
+    """
+    Represent a tempreture for Celsius, Fahrenheit and Kelvin
+    
+    Supports conversions between units and comparison operations
+    """
     TOLERANCE = 1e-9
     
-    def __init__(self, value, unit):            
+    def __init__(self, value: float, unit: str) -> None:            
         self._value = float(value)
         self._unit = unit.upper()
         
@@ -21,6 +26,11 @@ class Temperature:
     
     
     def to_celsius(self) -> float:
+        """
+        Coverts the temperature to Celsius
+        
+        Returns temperature in celsius as float
+        """
         if self._unit =='C':
             return self._value
         
@@ -59,6 +69,15 @@ class Temperature:
 #print(temp.to_kelvin())      #Expected answer: 273.15
 
     def convert_to(self, target_unit: str) -> 'Temperature':
+        """
+        Convert the temperature to the specific unit
+        
+        target_unit (str): the target temperature unit
+        
+        returns temperature object in the target unit
+        
+        raises ValueError if the target unit is invalid
+        """
         target_unit = target_unit.upper()
         
         if target_unit == 'C':
@@ -90,8 +109,7 @@ class Temperature:
         if not isinstance(other, Temperature):
             return NotImplemented
         
-        return abs(self.to_kelvin() - other.to_kelvin()) < 1e-9
-    
+        return abs(self.to_kelvin() - other.to_kelvin()) < self.TOLERANCE   
     def __ne__(self, other: object) -> bool:
         if not isinstance(other, Temperature):
             return NotImplemented
@@ -133,9 +151,3 @@ class Temperature:
 #print(temp3 > temp2)    # Expected answer:True
 #print(temp1 <= temp2)   # Expected answer:True
 #print(temp3 >= temp1)   # Expected answer:True
-
-
-
-
-
-    
