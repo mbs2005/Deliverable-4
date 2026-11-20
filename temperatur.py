@@ -12,15 +12,15 @@ class Temperature:
             raise ValueError("Temperatur below absolute zero")
     
     @property    
-    def value(self):
+    def value(self) -> float:
         return self._value
     
     @property
-    def unit(self):
+    def unit(self) -> str:
         return self._unit
     
     
-    def to_celsius(self):
+    def to_celsius(self) -> float:
         if self._unit =='C':
             return self._value
         
@@ -31,7 +31,7 @@ class Temperature:
             return self._value - 273.15
         
         
-    def to_fahrenheit(self):
+    def to_fahrenheit(self) -> float:
         if self._unit == 'F':
             return self._value
         
@@ -42,7 +42,7 @@ class Temperature:
             return (self._value - 273.15) * 9/5 + 32
         
         
-    def to_kelvin(self):
+    def to_kelvin(self) -> float:
         if self._unit == 'K':
             return self._value
         
@@ -58,7 +58,7 @@ class Temperature:
 #print(temp.to_fahrenheit())  #Expected answer: 32.0
 #print(temp.to_kelvin())      #Expected answer: 273.15
 
-    def convert_to(self, target_unit):
+    def convert_to(self, target_unit: str) -> 'Temperature':
         target_unit = target_unit.upper()
         
         if target_unit == 'C':
@@ -86,37 +86,37 @@ class Temperature:
 #temp = Temperature(25, 'C')
 #print(str(temp))            #Expected answer: 25.00 °C
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         if not isinstance(other, Temperature):
             return NotImplemented
         
         return abs(self.to_kelvin() - other.to_kelvin()) < 1e-9
     
-    def __ne__(self, other):
+    def __ne__(self, other: object) -> bool:
         if not isinstance(other, Temperature):
             return NotImplemented
         
         return not self == other
     
-    def __lt__(self, other):
+    def __lt__(self, other: object) -> bool:
         if not isinstance(other, Temperature):
             return NotImplemented 
         
         return self.to_kelvin() < other.to_kelvin()
     
-    def __le__(self, other):
+    def __le__(self, other: object) -> bool:
         if not isinstance(other, Temperature):
             return NotImplemented
         
         return self.to_kelvin() <= other.to_kelvin()
     
-    def __gt__(self, other):
+    def __gt__(self, other: object) -> bool:
         if not isinstance(other, Temperature):
             return NotImplemented
         
         return self.to_kelvin() > other.to_kelvin()
     
-    def __ge__(self, other):
+    def __ge__(self, other: object) -> bool:
         if not isinstance(other, Temperature):
             return NotImplemented
         
